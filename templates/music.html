@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <!-- Include Tailwind CSS styles -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8">
+
+    <!-- Song List -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        {% for song in songs %}
+            <div class="bg-white p-4 rounded-md shadow-md">
+                <img src="{{ song.image.url }}" alt="{{ song.title }}" class="mb-4 rounded-md">
+                <h3 class="text-lg font-semibold mb-2">{{ song.title }}</h3>
+                <p class="text-sm text-gray-500">{{ song.artist }}</p>
+                <a href="{{ song.audio_link }}" target="_blank" class="mt-2 text-blue-500 hover:underline focus:outline-none">
+                    Listen
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Audio Player -->
+    <div id="audioPlayer" class="hidden">
+        <audio controls id="player">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <script>
+        // JavaScript function to play the selected song
+        function playSong(audioUrl) {
+            const audioPlayer = document.getElementById('player');
+            audioPlayer.src = audioUrl;
+            audioPlayer.play();
+            document.getElementById('audioPlayer').classList.remove('hidden');
+        }
+    </script>
+
+</body>
+</html>

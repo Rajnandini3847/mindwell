@@ -49,32 +49,13 @@ def create_model(X, y, vocab_size):
     model.compile(optimizer='adam', loss="sparse_categorical_crossentropy", metrics=['accuracy'])
     return model
 
-def train_model(model, X, y, callbacks=None, epochs=6, batch_size=10):
+def train_model(model, X, y, callbacks=None, epochs=3, batch_size=5):
     return model.fit(x=X,
                      y=y,
                      batch_size=batch_size,
                      callbacks=callbacks,
                      epochs=epochs)
 
-def generate_answer(model, tokenizer, lbl_enc, df, pattern):
-    text = []
-    txt = re.sub('[^a-zA-Z\']', ' ', pattern)
-    txt = txt.lower()
-    txt = txt.split()
-    txt = " ".join(txt)
-    text.append(txt)
-
-    x_test = tokenizer.texts_to_sequences(text)
-    x_test = np.array(x_test).squeeze()
-    x_test = pad_sequences([x_test], padding='post', maxlen=X.shape[1])
-    y_pred = model.predict(x_test)
-    y_pred = y_pred.argmax()
-    tag = lbl_enc.inverse_transform([y_pred])[0]
-    responses = df[df['tag'] == tag]['responses'].values[0]
-
-    print("you: {}".format(pattern))
-    print("model: {}".format(random.choice(responses)))
-    
 def generate_answer(model, tokenizer, lbl_enc, df, X, pattern):
     text = []
     txt = re.sub('[^a-zA-Z\']', ' ', pattern)
@@ -91,9 +72,26 @@ def generate_answer(model, tokenizer, lbl_enc, df, X, pattern):
     tag = lbl_enc.inverse_transform([y_pred])[0]
     responses = df[df['tag'] == tag]['responses'].values[0]
 
-    print("you: {}".format(pattern))
-    print("model: {}".format(random.choice(responses)))
-
+    you = "you: {}".format(pattern)
+    model = "model: {}".format(random.choice(responses))
+    return you, model
 
 # Example usage:
-generate_answer(model, tokenizer, lbl_enc, processed_df, X, "Hi! How are you?")
+def call_bot(input):
+    data_df = load_data()
+    processed_df = preprocess_data(data_df)
+    tokenizer = Tokenizer(lower=True, split=' ')
+    tokenizer.fit_on_texts(processed_df['patterns'])
+    vocab_size = len(tokenizer.word_index)
+    ptrn2seq = tokenizer.texts_to_sequences(processed_df['patterns'])
+    X = pad_sequences(ptrn2seq, padding='post')
+    lbl_enc = LabelEncoder()
+    y = lbl_enc.fit_transform(processed_df['tag'])
+    model = create_model(X, y, vocab_size)
+    train_model(model, X, y)
+    you , model = generate_answer(model, tokenizer, lbl_enc, processed_df, X, input)
+    print(you)
+    print(model)
+    return model
+    
+# call_bot("i am sad, i just broke up with my girlfriend")
