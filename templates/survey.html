@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Form</title>
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8">
+
+    <div class="max-w-md mx-auto bg-white p-8 rounded shadow">
+
+        <h2 class="text-2xl font-semibold mb-6">Survey Form</h2>
+
+        
+        <div class="mb-4">
+            <label class="block text-gray-700 mb-2" for="q3">Question 1: What is your Name?</label>
+            <input type="text" id="q3" name="q3" class="border rounded w-full px-3 py-2">
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 mb-2" for="q1">Question 2: Please tell your gender?</label>
+            <input type="checkbox" id="q1" name="q1" class="mr-2"> Male
+            <input type="checkbox" id="q1" name="q1" class="mr-2"> Female
+            <input type="checkbox" id="q1" name="q1" class="mr-2"> Others
+        </div>
+
+         
+        <div class="mb-4">
+            <label class="block text-gray-700 mb-2" for="q4">Question 3: How about your age?</label>
+            <textarea id="q4" name="q4" class="border rounded w-full px-3 py-2"></textarea>
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 mb-2" for="q4">Question 4: What do you do in free time?</label>
+            <textarea id="q4" name="q4" class="border rounded w-full px-3 py-2"></textarea>
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 mb-2" for="q1">Question 5: Do you like Listening to music?</label>
+            <input type="checkbox" id="q1" name="q1" class="mr-2"> Yes
+            <input type="checkbox" id="q1" name="q1" class="mr-2"> No
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 mb-2" for="q2">Question 6: Which type of music do you like?</label>
+            <input type="checkbox" id="q2" name="q2" class="mr-2"> Pop
+            <input type="checkbox" id="q2a" name="q2" class="mr-2">Classical
+            <input type="checkbox" id="q2b" name="q2" class="mr-2"> Indie
+            <input type="checkbox" id="q2b" name="q2" class="mr-2"> Jazze
+
+            <div class="mb-4">
+                <label class="block text-gray-700 mb-2" for="q1">Question 7: Do you have any disease or are you under any medication?</label>
+                <input type="checkbox" id="q1" name="q1" class="mr-2"> Yes
+                <input type="checkbox" id="q1" name="q1" class="mr-2"> No
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 mb-2" for="q4">Question 8: Please specify that.</label>
+                <textarea id="q4" name="q4" class="border rounded w-full px-3 py-2"></textarea>
+            </div> 
+            
+
+    
+        <button class="bg-blue-500 text-white px-4 py-2 rounded mt-4">Submit</button>
+
+    </div>
+
+</body>
+</html>
