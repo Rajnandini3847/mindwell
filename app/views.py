@@ -91,9 +91,9 @@ def listen_music(request):
         user_input = Chat.objects.latest('-timestamp').user_input
         response = main_function(user_input)
 
-        if response == 'relationship-b':
+        if response == 'relationship-b' or "goodbye" or "self-esteem-A" or "relationship-a" or "domesticviolence" or "griefandloss" or "substanceabuse-a" or "family-conflict":
             songs = SadSongs.objects.all()
-        elif response == 'happy':
+        elif response == 'greetings':
             songs = HappySongs.objects.all()
         elif response == 'calm':
             songs = CalmSongs.objects.all()
@@ -105,7 +105,7 @@ def listen_music(request):
 
     except Exception as e:
         error_message = str(e)
-        return render(request, 'error.html', {'error': error_message})
+        return render(request, 'music.html', {'error': error_message})
 
 
 
