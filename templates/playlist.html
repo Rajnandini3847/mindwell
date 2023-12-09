@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Video Player</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-100 h-screen flex items-center justify-center">
-
+{% extends 'base.html' %}
+{% block content %}
     <div class="max-w-2xl w-full">
         <h1 class="text-3xl font-bold mb-4">Therapy Session</h1>
 
@@ -63,5 +55,5 @@
         });
     </script>
 
-</body>
-</html>
+    {% endblock %}
+
