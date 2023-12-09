@@ -1,25 +1,27 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from .bot import call_bot
+# from .bot import call_bot
 from django.http import JsonResponse
 from .models import *
 from .intent_ana import *
+from .gpt import *
 # Create your views here.
 
 def bot(request):
     if request.method == 'POST':
         try:
-            # Get the user input from the request data
             user_input = request.POST.get('user_input', '')
-            response = call_bot(user_input)
-            
+            response = generate_prompt(user_input)
+            print(response)
             # Save the chat history
             Chat.objects.create(user_input=user_input, response=response)
-
+            print("created")
             chat_history = Chat.objects.all().order_by('-timestamp')
             return render(request, 'bot.html', {'chat_history': chat_history})
         except Exception as e:
+            print(e)
+            print("error")
             return render(request, 'bot.html', {'error': str(e)})
 
     # Retrieve all chat history
@@ -37,7 +39,7 @@ def login_view(request):
 
         if user is not None:
             login(request, user)
-            return redirect('dashboard')  
+            return redirect('survey')  
         else:
             error_message = 'Invalid username or password.'
 
@@ -61,7 +63,7 @@ def signup_view(request):
 
             if user is not None:
                 login(request, user)
-                return redirect('dashboard')  
+                return redirect('login')  
 
     return render(request, 'signup.html', {'error_message': error_message})
 
@@ -108,4 +110,17 @@ def listen_music(request):
         return render(request, 'music.html', {'error': error_message})
 
 
+def playlist(request):
+    return render(request, 'playlist.html')
 
+def dashboard(request):
+    return render(request,'index.html')
+
+def avatar(request):
+    return render(request,'avatar.html')
+
+def task(request):
+    return render(request,'Tasks.html')
+
+def survey(request):
+    return render(request,'survey.html')
