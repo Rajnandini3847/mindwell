@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="max-w-md w-full bg-white p-8 rounded shadow-md">
+    <h1 class="text-3xl font-bold text-center mb-6 text-green-600">Congratulations!</h1>
+    <p class="text-gray-700 text-center mb-6">
+        You've successfully completed a task on your mental health journey. 
+        Take a moment to appreciate your progress and the effort you've put in.
+    </p>
+    <img src="https://placekitten.com/300/200" alt="Celebration Image" class="rounded-lg mb-6">
+
+    <div class="flex justify-center">
+        <a href="/dashboard" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
+            Back to Homepage
+        </a>
+    </div>
+</div>
+
+{% endblock %}

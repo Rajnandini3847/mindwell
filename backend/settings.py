@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "app"
+    "app",
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +49,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = "backend.urls"
@@ -129,3 +131,4 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 TWILIO_ACCOUNT_SID = 'ACcc515749012d3553d61d9a3382dfa509'
 TWILIO_AUTH_TOKEN = '0d179d25f1d2d5613b5bfbc192801fd2'
 TWILIO_PHONE_NUMBER = 'your_twilio_phone_number'
+

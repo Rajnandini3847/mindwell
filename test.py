@@ -18,7 +18,7 @@ responseData = client.sms.send_message(
     {
         "from": VONAGE_BRAND_NAME,
         "to": TO_NUMBER,
-        "text": "A text message sent using the Vonage SMS API",
+         "text": "Hello Dear Hope you doing fine, Wanna Chat a little bit?",
     }
 )
 

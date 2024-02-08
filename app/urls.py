@@ -15,5 +15,8 @@ urlpatterns = [
     path('avatar/',avatar, name='avatar'),
     path('task/',task, name='task'),
     path('survey/',survey, name='survey'),
+    path('notification/',notification, name='notification'),
+    path('congrats/',congrats, name='congrats'),
+    path("dynamic_task/", dynamic_tasks, name="dynamic_task"),
     
 ]

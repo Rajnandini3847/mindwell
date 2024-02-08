@@ -6,8 +6,11 @@ from django.http import JsonResponse
 from .models import *
 from .intent_ana import *
 from .gpt import *
+from .llama import *
+#import csrf extempt
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
-
+@csrf_exempt
 def bot(request):
     if request.method == 'POST':
         try:
@@ -124,3 +127,47 @@ def task(request):
 
 def survey(request):
     return render(request,'survey.html')
+
+
+from os.path import join, dirname
+from dotenv import load_dotenv
+import vonage
+
+
+def notification(request):
+    dotenv_path = join(dirname(__file__), "../.env")
+    load_dotenv(dotenv_path)
+
+    VONAGE_API_KEY = "e8e6fb61"
+    VONAGE_API_SECRET = "7NCsDAIv5fAUFjLV"
+    VONAGE_BRAND_NAME = "akash"
+    TO_NUMBER = "916201933790"
+
+
+    client = vonage.Client(key=VONAGE_API_KEY, secret=VONAGE_API_SECRET)
+
+    responseData = client.sms.send_message(
+        {
+            "from": VONAGE_BRAND_NAME,
+            "to": TO_NUMBER,
+            "text": "Hello Dear Hope you doing fine, Wanna Chat a little bit?",
+        }
+    )
+
+    if responseData["messages"][0]["status"] == "0":
+        print("Message sent successfully.")
+        return redirect('dashboard')
+    else:
+        print(f"Message failed with error: {responseData['messages'][0]['error-text']}")
+        return redirect('dashboard')
+
+
+def congrats(request):
+    return render(request,'congrats.html')
+
+
+def dynamic_tasks(request):
+    user_input = "generate 10 tasks for me to cure my mental health in a list form separated by commas"
+    response = run_chatbot(user_input)
+            
+    return render(request, 'dynamic_tasks.html',{'response': response})
